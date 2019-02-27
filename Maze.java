@@ -19,13 +19,21 @@ public class Maze{
 
 
       3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then:
-
          throw a FileNotFoundException or IllegalStateException
 
     */
 
     public Maze(String filename) throws FileNotFoundException{
-        //COMPLETE CONSTRUCTOR
+        animate = false;
+        File data = new File(filename);
+        Scanner scan = new Scanner(data); 
+        int row = 0;
+        while (scan.hasNextLine()){
+          row++;
+          int col = scan.nextLine();
+        }
+        maze = new char[row][col];
+
     }
 
 
