@@ -106,9 +106,8 @@ public class Maze{
       //erase the S
       //and start solving at the location of the s.
       //return solve(???,???);
-      return solve(coor[0], coor[1]);
+      return solve(coor[0], coor[1], 0);
     }
-
 
     /*
       Recursive Solve function:
@@ -123,8 +122,10 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
-
+    private int solve(int row, int col, int count){ //you can add more parameters since this is private
+        if (maze[row][col] == 'E'){
+          return count;
+        }
         //automatic animation! You are welcome.
         if(animate){
             clearTerminal();
@@ -136,4 +137,7 @@ public class Maze{
         return -1; //so it compiles
     }
 
+    private boolean checkDirection(int row, int col, int horizontalShift, int verticalShift){
+      return maze[row+verticalShift][col+horizontalShift] == ' '; 
+    }
 }
