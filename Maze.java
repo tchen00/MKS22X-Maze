@@ -106,8 +106,7 @@ public class Maze{
       //erase the S
       //and start solving at the location of the s.
       //return solve(???,???);
-      return solve(coor[0], coor[1], 1);
-
+      return solve(coor[0], coor[1]);
     }
 
 
