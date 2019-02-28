@@ -101,6 +101,7 @@ public class Maze{
           }
         }
       }
+      maze[coor[0]][coor[1]] = '@';
             //find the location of the S.
             //erase the S
             //and start solving at the location of the s.

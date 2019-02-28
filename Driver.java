@@ -9,9 +9,9 @@ public class Driver{
         f = new Maze(filename);//true animates the maze.
         //System.out.println(f.toString());
         //f.setAnimate(true);
-        //f.solve();
+        f.solve();
         System.out.println(f);
-        System.out.println(f.findStart()[1]);
+        //System.out.println(f.findStart()[1]);
       }catch(FileNotFoundException e){
         System.out.println("Invalid filename: "+filename);
       }
