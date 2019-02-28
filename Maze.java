@@ -89,6 +89,18 @@ public class Maze{
     */
     public int solve(){
       //int[] = findStart();
+      //finding the S
+      int[] coor = new int[2];
+      boolean found = false;
+      for (int i = 0; i < maze.length && !found; i++){
+        for (int j = 0; j < maze[i].length && !found; j++){
+          if (maze[i][j] == 'S'){
+            coor[0] = i;
+            coor[1] = j;
+            found = true;
+          }
+        }
+      }
             //find the location of the S.
             //erase the S
             //and start solving at the location of the s.
@@ -97,20 +109,7 @@ public class Maze{
 
     }
 
-    public int[] findStart(){
-        int[] coor = new int[2];
-        boolean found = false;
-        for (int i = 0; i < maze.length && !found; i++){
-          for (int j = 0; j < maze[i].length && !found; j++){
-            if (maze[i][j] == 'S'){
-              coor[0] = i;
-              coor[1] = j;
-              found = true;
-            }
-          }
-        }
-        return coor;
-    }
+
 
     /*
       Recursive Solve function:
