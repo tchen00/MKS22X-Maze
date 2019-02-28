@@ -27,15 +27,23 @@ public class Maze{
         animate = false;
         File data = new File(filename);
         Scanner scan = new Scanner(data);
+        Scanner filler = new Scanner(data);
         int row = 0;
         int col = 0;
+        int count = 0;
         while (scan.hasNextLine()){
           row++;
           String line = scan.nextLine();
           col = line.length();
-          scan.nextLine();
         }
+        // for debug System.out.println(col);
         maze = new char[row][col];
+        while (filler.hasNextLine()){
+          String line = filler.nextLine();
+          for (int i = 0; i < line.length(); i++){
+            maze[count][i] = line.charAt(i);
+          } count++;
+        }
     }
 
 
@@ -47,6 +55,19 @@ public class Maze{
          }
      }
 
+     /*Return the string that represents the maze.
+       It should look like the text file with some characters replaced.
+      */
+      public String toString(){
+        String output = "";
+        for (int i = 0; i < maze.length; i++){
+          for (int j = 0; j < maze[i].length; j++){
+            output += maze[i][j];
+            if (j == maze[i].length - 1) output += "\n";
+          }
+        }
+        return output;
+      }
 
     public void setAnimate(boolean b){
 
@@ -82,7 +103,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
-            return -1; 
+            return -1;
 
     }
 
