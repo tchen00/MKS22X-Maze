@@ -123,21 +123,37 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col, int count){ //you can add more parameters since this is private
-        if (maze[row][col] == 'E'){
-          return count;
-        }
         //automatic animation! You are welcome.
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(20);
+            wait(40);
+        }
+        if (maze[row][col] == 'E'){
+          return count;
+        }
+        if (checkDirection(row, col, 1, 0)){
+          maze[row+1][col] = '@';
+          solve(row+1, col, count+1);
+        }
+        if (checkDirection(row, col, 0, 1)){
+          maze[row][col+1] = '@';
+          solve(row, col+1, count+1);
+        }
+        if (checkDirection(row, col, -1, 0)){
+          maze[row-1][col] = '@';
+          solve(row-1, col, count+1);
+        }
+        if (checkDirection(row, col, 0, -1)){
+          maze[row][col-1] = '@';
+          solve(row, col-1, count+1);
         }
 
         //COMPLETE SOLVE
         return -1; //so it compiles
     }
 
-    private boolean checkDirection(int row, int col, int horizontalShift, int verticalShift){
-      return maze[row+verticalShift][col+horizontalShift] == ' '; 
+    private boolean checkDirection(int row, int col, int verticalShift, int horizontalShift){
+      return maze[row+verticalShift][col+horizontalShift] == ' ';
     }
 }
