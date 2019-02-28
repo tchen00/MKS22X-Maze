@@ -26,14 +26,16 @@ public class Maze{
     public Maze(String filename) throws FileNotFoundException{
         animate = false;
         File data = new File(filename);
-        Scanner scan = new Scanner(data); 
+        Scanner scan = new Scanner(data);
         int row = 0;
+        int col = 0;
         while (scan.hasNextLine()){
           row++;
-          int col = scan.nextLine();
+          String line = scan.nextLine();
+          col = line.length();
+          scan.nextLine();
         }
         maze = new char[row][col];
-
     }
 
 
@@ -80,6 +82,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
+            return -1; 
 
     }
 
