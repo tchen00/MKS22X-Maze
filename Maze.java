@@ -70,18 +70,13 @@ public class Maze{
       }
 
     public void setAnimate(boolean b){
-
         animate = b;
-
     }
 
 
     public void clearTerminal(){
-
         //erase terminal, go to top left of screen.
-
         System.out.println("\033[2J\033[1;1H");
-
     }
 
 
@@ -93,18 +88,28 @@ public class Maze{
 
     */
     public int solve(){
-
+      //int[] = findStart();
             //find the location of the S.
-
-
             //erase the S
-
-
             //and start solving at the location of the s.
-
             //return solve(???,???);
             return -1;
 
+    }
+
+    public int[] findStart(){
+        int[] coor = new int[2];
+        boolean found = false;
+        for (int i = 0; i < maze.length && !found; i++){
+          for (int j = 0; j < maze[i].length && !found; j++){
+            if (maze[i][j] == 'S'){
+              coor[0] = i;
+              coor[1] = j;
+              found = true;
+            }
+          }
+        }
+        return coor;
     }
 
     /*
