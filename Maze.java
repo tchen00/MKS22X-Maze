@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 public class Maze{
 
-
     private char[][]maze;
     private boolean animate;//false by default
 
@@ -24,13 +23,16 @@ public class Maze{
     */
 
     public Maze(String filename) throws FileNotFoundException{
+        // default for animate is false
         animate = false;
+        // reading the data (two scanners bc two loops)
         File data = new File(filename);
         Scanner scan = new Scanner(data);
         Scanner filler = new Scanner(data);
         int row = 0;
         int col = 0;
         int count = 0;
+        //count number of rows and col to set up maze array
         while (scan.hasNextLine()){
           row++;
           String line = scan.nextLine();
@@ -38,6 +40,7 @@ public class Maze{
         }
         // for debug System.out.println(col);
         maze = new char[row][col];
+        // fill the array w/ correct symbols from the .dat files
         while (filler.hasNextLine()){
           String line = filler.nextLine();
           for (int i = 0; i < line.length(); i++){
@@ -46,7 +49,7 @@ public class Maze{
         }
     }
 
-
+    //code to wait from Mr. K
     private void wait(int millis){
          try {
              Thread.sleep(millis);
@@ -55,19 +58,20 @@ public class Maze{
          }
      }
 
-     /*Return the string that represents the maze.
-       It should look like the text file with some characters replaced.
-      */
-      public String toString(){
-        String output = "";
-        for (int i = 0; i < maze.length; i++){
-          for (int j = 0; j < maze[i].length; j++){
-            output += maze[i][j];
-            if (j == maze[i].length - 1) output += "\n";
-          }
+    /*Return the string that represents the maze.
+     It should look like the text file with some characters replaced.
+    */
+    public String toString(){
+      //toString for the array
+      String output = "";
+      for (int i = 0; i < maze.length; i++){
+        for (int j = 0; j < maze[i].length; j++){
+          output += maze[i][j];
+          if (j == maze[i].length - 1) output += "\n"; // skip line
         }
-        return output;
       }
+      return output;
+    }
 
     public void setAnimate(boolean b){
         animate = b;
@@ -101,11 +105,9 @@ public class Maze{
           }
         }
       }
+      // after found S replace it with @
       maze[coor[0]][coor[1]] = '@';
-      //find the location of the S.
-      //erase the S
-      //and start solving at the location of the s.
-      //return solve(???,???);
+      // recursive helper
       return solve(coor[0], coor[1], 0);
     }
 
@@ -123,18 +125,20 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col, int count){ //you can add more parameters since this is private
-        //automatic animation! You are welcome.
+        //automatic animation! You are welcome. (haha from Mr.K)
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(40);
+            wait(30);
         }
+        // if the current position is the End --> base case sorta
         if (maze[row][col] == 'E'){
           setAnimate(false);
           System.out.println(count);
           return count;
         }
 
+        // checks to see if each of the directions is valid
         if (checkDirection(row, col, 1, 0)){
           maze[row+1][col] = '@';
           solve(row+1, col, count+1);
@@ -152,6 +156,7 @@ public class Maze{
           solve(row, col-1, count+1);
         }
 
+        // checks to see if the surrounding has the E(nd)
         if (maze[row+1][col] == 'E'){
           solve(row+1, col, count+1);
         }
@@ -165,9 +170,11 @@ public class Maze{
           solve(row, col-1, count+1);
         }
 
+        // if all fails, then go backwards !!!
         maze[row][col] = '.';
         count--;
         //COMPLETE SOLVE
+        // if no solution
         return -1; //so it compiles
     }
 
