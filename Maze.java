@@ -130,8 +130,11 @@ public class Maze{
             wait(40);
         }
         if (maze[row][col] == 'E'){
+          setAnimate(false);
+          System.out.println(count);
           return count;
         }
+
         if (checkDirection(row, col, 1, 0)){
           maze[row+1][col] = '@';
           solve(row+1, col, count+1);
@@ -149,6 +152,21 @@ public class Maze{
           solve(row, col-1, count+1);
         }
 
+        if (maze[row+1][col] == 'E'){
+          solve(row+1, col, count+1);
+        }
+        if (maze[row][col+1] == 'E'){
+          solve(row, col+1, count+1);
+        }
+        if (maze[row-1][col] == 'E'){
+          solve(row-1, col, count+1);
+        }
+        if (maze[row][col-1] == 'E'){
+          solve(row, col-1, count+1);
+        }
+
+        maze[row][col] = '.';
+        count--;
         //COMPLETE SOLVE
         return -1; //so it compiles
     }
