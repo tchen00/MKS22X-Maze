@@ -102,14 +102,13 @@ public class Maze{
         }
       }
       maze[coor[0]][coor[1]] = '@';
-            //find the location of the S.
-            //erase the S
-            //and start solving at the location of the s.
-            //return solve(???,???);
-            return -1;
+      //find the location of the S.
+      //erase the S
+      //and start solving at the location of the s.
+      //return solve(???,???);
+      return solve(coor[0], coor[1], 1);
 
     }
-
 
 
     /*
@@ -120,31 +119,22 @@ public class Maze{
       Returns the number of @ symbols from S to E when the maze is solved,
       Returns -1 when the maze has no solution.
 
-
       Postcondition:
-
         The S is replaced with '@' but the 'E' is not.
-
         All visited spots that were not part of the solution are changed to '.'
-
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
 
-
         //automatic animation! You are welcome.
         if(animate){
-
             clearTerminal();
             System.out.println(this);
-
             wait(20);
         }
 
         //COMPLETE SOLVE
-
         return -1; //so it compiles
     }
-
 
 }
