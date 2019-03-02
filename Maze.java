@@ -108,7 +108,7 @@ public class Maze{
       // after found S replace it with @
       maze[coor[0]][coor[1]] = '@';
       // recursive helper
-      return solve(coor[0], coor[1], 0);
+      return solve(coor[0], coor[1], 1);
     }
 
     /*
@@ -129,7 +129,8 @@ public class Maze{
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(30);
+            //System.out.println("the count is " + count);
+            wait(20);
         }
         // if the current position is the End --> base case sorta
         if (maze[row][col] == 'E'){
@@ -158,16 +159,16 @@ public class Maze{
 
         // checks to see if the surrounding has the E(nd)
         if (maze[row+1][col] == 'E'){
-          solve(row+1, col, count+1);
+          solve(row+1, col, count);
         }
         if (maze[row][col+1] == 'E'){
-          solve(row, col+1, count+1);
+          solve(row, col+1, count);
         }
         if (maze[row-1][col] == 'E'){
-          solve(row-1, col, count+1);
+          solve(row-1, col, count);
         }
         if (maze[row][col-1] == 'E'){
-          solve(row, col-1, count+1);
+          solve(row, col-1, count);
         }
 
         // if all fails, then go backwards !!!
