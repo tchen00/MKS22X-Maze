@@ -129,7 +129,7 @@ public class Maze{
         if(animate){
             clearTerminal();
             System.out.println(this);
-            //System.out.println("the count is " + count);
+            //System.out.println("the count is " + count); debug
             wait(20);
         }
         // if the current position is the End --> base case sorta
@@ -178,7 +178,7 @@ public class Maze{
         // if no solution
         return -1; //so it compiles
     }
-
+    // private method that checks to see if the particular direction is empty (space)
     private boolean checkDirection(int row, int col, int verticalShift, int horizontalShift){
       return maze[row+verticalShift][col+horizontalShift] == ' ';
     }
