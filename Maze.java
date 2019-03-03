@@ -180,6 +180,6 @@ public class Maze{
     }
     // private method that checks to see if the particular direction is empty (space)
     private boolean checkDirection(int row, int col, int verticalShift, int horizontalShift){
-      return maze[row+verticalShift][col+horizontalShift] == ' ';
+        return maze[row+verticalShift][col+horizontalShift] == ' ';
     }
 }
