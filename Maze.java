@@ -106,9 +106,9 @@ public class Maze{
         }
       }
       // after found S replace it with @
-      maze[coor[0]][coor[1]] = '@';
+      maze[coor[0]][coor[1]] = ' ';
       // recursive helper
-      return solve(coor[0], coor[1], 1);
+      return solve(coor[0], coor[1]);
     }
 
     /*
@@ -124,7 +124,7 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col, int count){ //you can add more parameters since this is private
+    private int solve(int row, int col){ //you can add more parameters since this is private
         //automatic animation! You are welcome. (haha from Mr.K)
         if(animate){
             clearTerminal();
@@ -132,52 +132,27 @@ public class Maze{
             //System.out.println("the count is " + count); debug
             wait(20);
         }
-        // if the current position is the End --> base case sorta
-        if (maze[row][col] == 'E'){
-          setAnimate(false);
-          //System.out.println(count);
-          return count;
-        }
 
-        // checks to see if each of the directions is valid
-        if (checkDirection(row, col, 1, 0)){
-          maze[row+1][col] = '@';
-          solve(row+1, col, count+1);
-        }
-        if (checkDirection(row, col, 0, 1)){
-          maze[row][col+1] = '@';
-          solve(row, col+1, count+1);
-        }
-        if (checkDirection(row, col, -1, 0)){
-          maze[row-1][col] = '@';
-          solve(row-1, col, count+1);
-        }
-        if (checkDirection(row, col, 0, -1)){
-          maze[row][col-1] = '@';
-          solve(row, col-1, count+1);
-        }
+        int[][] directions = {{0,1},{0,-1},{-1,0},{1,0}}; //up, down, left, right
 
-        // checks to see if the surrounding has the E(nd)
-        if (maze[row+1][col] == 'E'){
-          solve(row+1, col, count);
-        }
-        if (maze[row][col+1] == 'E'){
-          solve(row, col+1, count);
-        }
-        if (maze[row-1][col] == 'E'){
-          solve(row-1, col, count);
-        }
-        if (maze[row][col-1] == 'E'){
-          solve(row, col-1, count);
-        }
+        int temp = 0;
+        if (maze[row][col] == 'E') return temp; //if exit found
+        if (maze[row][col] != ' ') return -1;
 
-        // if all fails, then go backwards !!!
-        maze[row][col] = '.';
-        count--;
-        //COMPLETE SOLVE
-        // if no solution
-        return -1; //so it compiles
+        maze[row][col] = '@'; //mark this spot as traveled to
+        int output = 0;
+        for (int i = 0; i < directions.length; i++){
+          output = solve(row + directions[i][0], col + directions[i][1]); //try move
+          if (output != -1) {
+            return output + 1;
+          } else if (maze[row + directions[i][0]][col + directions[i][1]] == 'E') {
+            return 1; // if end found
+            }
+        }
+        maze[row][col] = '.'; //if everything fails
+        return -1; //so it compiles properly
     }
+
     // private method that checks to see if the particular direction is empty (space)
     private boolean checkDirection(int row, int col, int verticalShift, int horizontalShift){
       try {
