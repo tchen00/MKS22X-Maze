@@ -133,26 +133,26 @@ public class Maze{
             wait(20);
         }
 
-        int[][] directions = {{0,1},{0,-1},{-1,0},{1,0}}; //up, down, left, right
+        int[][] directions = {{0,1},{0,-1},{1,0},{-1,0}}; //up, down, right, left
 
-        int temp = 0;
-        if (maze[row][col] == 'E') return temp; //if exit found
-        if (maze[row][col] != ' ') return -1;
+        int count = 0;
+        if (maze[row][col] == 'E') return count; // if 'E' found
+        if (maze[row][col] != ' ') return -1; // if wall/obstacle
 
-        maze[row][col] = '@'; //mark this spot as traveled to
+        maze[row][col] = '@'; //replaces with @
         int output = 0;
         for (int i = 0; i < directions.length; i++){
-          output = solve(row + directions[i][0], col + directions[i][1]); //try move
+          output = solve(row + directions[i][0], col + directions[i][1]); //recursive calling to move up down right left
           if (output != -1) {
-            return output + 1;
+            return output++;
           } else if (maze[row + directions[i][0]][col + directions[i][1]] == 'E') {
-            return 1; // if end found
+            return 1; //if end found
             }
         }
         maze[row][col] = '.'; //if everything fails
         return -1; //so it compiles properly
     }
-
+/*
     // private method that checks to see if the particular direction is empty (space)
     private boolean checkDirection(int row, int col, int verticalShift, int horizontalShift){
       try {
@@ -163,4 +163,5 @@ public class Maze{
       return false;
 
     }
+*/
 }
