@@ -136,6 +136,7 @@ public class Maze{
         int[][] directions = {{0,1},{0,-1},{1,0},{-1,0}}; //up, down, right, left
 
         int count = 0;
+
         if (maze[row][col] == 'E') return count; // if 'E' found
         if (maze[row][col] != ' ') return -1; // if wall/obstacle
 
