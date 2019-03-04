@@ -135,7 +135,7 @@ public class Maze{
         // if the current position is the End --> base case sorta
         if (maze[row][col] == 'E'){
           setAnimate(false);
-          System.out.println(count);
+          //System.out.println(count);
           return count;
         }
 
@@ -180,6 +180,12 @@ public class Maze{
     }
     // private method that checks to see if the particular direction is empty (space)
     private boolean checkDirection(int row, int col, int verticalShift, int horizontalShift){
-        return maze[row+verticalShift][col+horizontalShift] == ' ';
+      try {
+        if (maze[row+verticalShift][col+horizontalShift] == ' ') return true;
+      }
+      catch (IndexOutOfBoundsException e){
+      }
+      return false;
+
     }
 }
