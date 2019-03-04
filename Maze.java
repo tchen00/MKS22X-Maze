@@ -130,7 +130,7 @@ public class Maze{
             clearTerminal();
             System.out.println(this);
             //System.out.println("the count is " + count); debug
-            wait(20);
+            wait(10);
         }
 
         int[][] directions = {{0,1},{0,-1},{1,0},{-1,0}}; //up, down, right, left
@@ -144,7 +144,7 @@ public class Maze{
         for (int i = 0; i < directions.length; i++){
           output = solve(row + directions[i][0], col + directions[i][1]); //recursive calling to move up down right left
           if (output != -1) {
-            return output++;
+            return output + 1;
           } else if (maze[row + directions[i][0]][col + directions[i][1]] == 'E') {
             return 1; //if end found
             }
